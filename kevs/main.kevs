@@ -1,0 +1,38 @@
+repo "http://repo1.maven.org/maven2/"
+
+add java : JavaNode/5.3.1
+add node0 : JavascriptNode/5.3.3
+add java.comp884_2, java.comp884_1, java.comp884_0, java.comp884 : DockerContainer/5.3.1
+add node0.comp464 : Ticker/5.3.2-SNAPSHOT
+add node0.comp989 : KevScript/5.3.2-SNAPSHOT
+add group639 : RemoteWSGroup/5.3.1
+add chan965 : LocalChannel/5.0.2
+
+attach java, node0 group639
+
+bind node0.comp989.trigger chan965
+bind node0.comp464.tick chan965
+
+set java.comp884_2.image = 'nginx'
+set java.comp884_2.stopTimeout = '10'
+set java.comp884_1.image = 'nginx'
+set java.comp884_1.stopTimeout = '10'
+set java.comp884_0.image = 'nginx'
+set java.comp884_0.stopTimeout = '10'
+set java.comp884.image = 'nginx'
+set java.comp884.stopTimeout = '10'
+set node0.comp989.kevScript = "add java.{nn}: DockerContainer
+set java.{nn}.image = 'nginx'
+set java.{nn}.stopTimeout = '10'"
+set group639.path = '/killall'
+set group639.host = 'ws.kevoree.org'
+
+network java.ip.2_vethebfe528 fe80:0:0:0:a4c9:4cff:fed2:baf5%vethebfe528
+network java.ip.7_eth0 fe80:0:0:0:4a0f:cfff:fe29:1d88%eth0
+network java.ip.6_wlan0 10.7.194.145
+network java.ip.8_eth0 131.254.16.207
+network java.ip.0_vethf1c57e1 fe80:0:0:0:8838:4dff:fe28:c014%vethf1c57e1
+network java.ip.3_docker0 fe80:0:0:0:42:e5ff:fed3:93dd%docker0
+network java.ip.5_wlan0 fe80:0:0:0:3602:86ff:fe5e:a24f%wlan0
+network java.ip.1_veth9dee79b fe80:0:0:0:b85c:dff:fefe:534b%veth9dee79b
+network java.ip.4_docker0 172.17.0.1
